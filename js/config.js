@@ -1,0 +1,1 @@
+var VERSION = "server";	//debug: debug version, server:server version

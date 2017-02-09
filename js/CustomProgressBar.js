@@ -1,0 +1,10 @@
+/*
+
+class: CustomProgressBar
+author: Herminder Singh
+version: 1.0
+date: 09th Feb 2017
+
+*/
+
+var CustomProgressBar=function(a,b,c){this.id=a,this.nProgress=b,this.nProgressActual=b,this.nLimit=Number(c)};CustomProgressBar.prototype.generate=function(){var a=document.getElementById("barHolder"),b=document.createElement("div");b.setAttribute("id","progressBar"+this.id),b.setAttribute("class","progressBar");var c=document.createElement("div");c.setAttribute("id","barBG"),c.setAttribute("class","barBG"),b.appendChild(c);var d=document.createElement("div");d.setAttribute("id","label"),d.setAttribute("class","label"),b.appendChild(d),a.appendChild(b),d.innerHTML=this.nProgress+"("+Math.round(100*this.nProgress/this.nLimit)+"%)",c.style.width=Math.round(this.nProgress*b.offsetWidth/this.nLimit)+"px"},CustomProgressBar.prototype.updateProgress=function(a){var b=this.nProgress;this.nProgress+=Number(a),this.nProgressActual+=Number(a);var c=document.getElementById("progressBar"+this.id);c.firstChild,c.childNodes[1];this.nProgress<0&&(this.nProgress=0,this.nProgressActual=0),this.nProgressActual>=this.nLimit&&(this.nProgress=this.nLimit),b<this.nProgress?this.animatePositive(b,this.nProgress):this.animateNegative(b,this.nProgress)},CustomProgressBar.prototype.animateNegative=function(a,b){var c=document.getElementById("progressBar"+this.id),d=c.firstChild,e=c.childNodes[1],f=this;a!=b&&(d.style.backgroundColor="#9cd9ea",a--,setTimeout(function(){d.style.width=Math.round(a*c.offsetWidth/f.nLimit)+"px",e.innerHTML=a+"("+Math.round(100*a/f.nLimit)+"%)",f.animateNegative(a,b)},15))},CustomProgressBar.prototype.animatePositive=function(a,b){var c=document.getElementById("progressBar"+this.id),d=c.firstChild,e=c.childNodes[1],f=this;return a==b?void(this.nProgressActual>=this.nLimit&&(d.style.backgroundColor="red")):(d.style.backgroundColor="#9cd9ea",a++,void setTimeout(function(){d.style.width=Math.round(a*c.offsetWidth/f.nLimit)+"px",e.innerHTML=a+"("+Math.round(100*a/f.nLimit)+"%)",f.animatePositive(a,b)},15))};
